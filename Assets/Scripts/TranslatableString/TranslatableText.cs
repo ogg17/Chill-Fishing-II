@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace TranslatableString
 {
-    [RequireComponent(typeof(TextMeshPro))]
+    [RequireComponent(typeof(TextMeshProUGUI))]
     public class TranslatableText: MonoBehaviour
     {
-        public string name = "unnamed";
+        public string valueName = "unnamed";
 
-        private TextMeshPro _text;
+        private TextMeshProUGUI _text;
 
         public void OnChangeLanguage(string value)
         {
-            if (_text == null) _text = GetComponent<TextMeshPro>();
+            if (_text == null) _text = GetComponent<TextMeshProUGUI>();
             _text.text = value;
         }
     }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8f29b794a945c099aaf3e5ea986e7c, type: 3}
+  m_Name: CoreStorage
+  m_EditorClassIdentifier: 
+  textStorage: {fileID: 11400000, guid: 88126e5565b381b4486920a60fc4f000, type: 2}
+  settingsStorage: {fileID: 11400000, guid: 75000f3a0cf0ebb4ebdcbbef93b52e01, type: 2}
+  eventsStorage: {fileID: 11400000, guid: aafc8b7970cf748458defb71e91ca1af, type: 2}

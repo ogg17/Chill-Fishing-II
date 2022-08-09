@@ -1,5 +1,6 @@
 using System;
 using Leopotam.EcsLite;
+using TranslatableString;
 using UnityEngine;
 
 namespace Core
@@ -12,29 +13,37 @@ namespace Core
         private EcsWorld _world;
         private EcsSystems _systems;
         private EcsSystems _fixedSystems;
+        private EventSystems _eventSystems;
         
         void Start()
         {
+            coreStorage.settingsStorage.events = coreStorage.eventsStorage;
+            coreStorage.textStorage.settingsStorage = coreStorage.settingsStorage;
+            
             _world = new EcsWorld();
             _systems = new EcsSystems(_world, new WorldData {
                 CoreStorage = coreStorage, SceneData = sceneData } );
-            _fixedSystems = new EcsSystems(_world, _systems.GetShared<WorldData>());
-            
             _systems
 #if UNITY_EDITOR
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
 #endif
+                .Add(new ChangeLanguageInitSystem())
                 .Init();
+
+            _eventSystems = new EventSystems(_world, sceneData, coreStorage.eventsStorage);
+            
+            _fixedSystems = new EcsSystems(_world, _systems.GetShared<WorldData>());
+            //_fixedSystems.Init();
         }
 
         private void Update()
         {
-            _systems?.Run();
+           // _systems?.Run();
         }
 
         private void FixedUpdate()
         {
-            _fixedSystems?.Run();
+           // _fixedSystems?.Run();
         }
 
         private void OnDestroy()
@@ -43,6 +52,8 @@ namespace Core
                 _systems.Destroy();
                 _systems = null;
             }
+            
+            _eventSystems.Destroy();
 
             if (_fixedSystems != null)
             {
