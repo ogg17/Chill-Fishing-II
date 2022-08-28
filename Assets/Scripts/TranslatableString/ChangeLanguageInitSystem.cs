@@ -19,7 +19,6 @@ namespace TranslatableString
                 var translatableTextEntity = world.NewEntity();
                 ref TranslatableTextComponent textComponent = ref translatablePool.Add(translatableTextEntity);
                 textComponent.TranslatableText = textObject;
-                Debug.Log(textComponent.TranslatableText.valueName);
                 textObject.OnChangeLanguage(data.CoreStorage
                     .textStorage.GetValue(textObject.valueName));
             }

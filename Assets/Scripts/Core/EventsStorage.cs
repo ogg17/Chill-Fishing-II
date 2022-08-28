@@ -7,5 +7,6 @@ namespace Core
     public class EventsStorage: ScriptableObject
     {
         public UnityEvent changeLanguage = new UnityEvent();
+        public UnityEvent finishedSplashScreen = new UnityEvent();
     }
 }

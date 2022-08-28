@@ -29,19 +29,22 @@ namespace TranslatableString
                 {
                     case SystemLanguage.Russian:
                         if (_russian == null)
-                        {
-                            var json = Resources.Load<TextAsset>(Path.Combine(textFolder, russianFile)).text;
-                            Debug.Log(json);
-                            var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-                            if (dictionary == null) Debug.Log("Json not load");
-                            _russian = dictionary;
-                        }
+                            _russian = GetDictionary(russianFile);
                         return _russian;
                     default:
-                        return _english ??= JsonUtility.FromJson<Dictionary<string, string>>(
-                            Resources.Load<TextAsset>($"{textFolder}/{englishFile}").text);
+                        if (_english == null)
+                            _english = GetDictionary(englishFile);
+                        return _english;
                 }
             }
+        }
+
+        private Dictionary<string, string> GetDictionary(string file)
+        {
+            var json = Resources.Load<TextAsset>(Path.Combine(textFolder, file)).text;
+            var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            if (dictionary == null) Debug.Log("Json not load!");
+            return dictionary;
         }
 
         public string GetValue(string valueName)

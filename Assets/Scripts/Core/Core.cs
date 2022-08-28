@@ -1,7 +1,8 @@
-using System;
+using System.Collections;
 using Leopotam.EcsLite;
 using TranslatableString;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Core
 {
@@ -21,6 +22,7 @@ namespace Core
             coreStorage.textStorage.settingsStorage = coreStorage.settingsStorage;
             
             _world = new EcsWorld();
+            
             _systems = new EcsSystems(_world, new WorldData {
                 CoreStorage = coreStorage, SceneData = sceneData } );
             _systems
@@ -30,10 +32,17 @@ namespace Core
                 .Add(new ChangeLanguageInitSystem())
                 .Init();
 
-            _eventSystems = new EventSystems(_world, sceneData, coreStorage.eventsStorage);
-            
             _fixedSystems = new EcsSystems(_world, _systems.GetShared<WorldData>());
-            //_fixedSystems.Init();
+            
+            Initialization();
+        }
+
+        private void Initialization()
+        {
+            _eventSystems = new EventSystems(_world, sceneData, coreStorage.eventsStorage);
+            StartCoroutine(EndSplashScreen());
+
+            coreStorage.eventsStorage.finishedSplashScreen.AddListener(sceneData.gameNameAnimation.OnFinishedSplashScreen);
         }
 
         private void Update()
@@ -46,6 +55,12 @@ namespace Core
            // _fixedSystems?.Run();
         }
 
+        private IEnumerator EndSplashScreen()
+        {
+            yield return new WaitUntil(() => SplashScreen.isFinished);
+            coreStorage.eventsStorage.finishedSplashScreen.Invoke();
+        }
+        
         private void OnDestroy()
         {
             if (_systems != null) {
