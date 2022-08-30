@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f05ea5e7cc0949a68298658c9b0054c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c0fd3aca5b74254d94d2ea58dfa8927, type: 3}
   m_Name: SettingsStorage
   m_EditorClassIdentifier: 
-  events: {fileID: 11400000, guid: aafc8b7970cf748458defb71e91ca1af, type: 2}
-  language: 30
+  events: {fileID: 0}

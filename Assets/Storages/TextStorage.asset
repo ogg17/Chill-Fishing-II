@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccffdd57a3c34284ab75aac55891205b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f0f10e0457242249b8255c0a2df3bc5, type: 3}
   m_Name: TextStorage
   m_EditorClassIdentifier: 
-  textFolder: Text
+  textFolder: Text/
   englishFile: En_us
   russianFile: Ru_ru
-  settingsStorage: {fileID: 11400000, guid: 75000f3a0cf0ebb4ebdcbbef93b52e01, type: 2}
+  settingsStorage: {fileID: 0}

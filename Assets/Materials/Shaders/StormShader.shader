@@ -1,46 +1,62 @@
-Shader "Noise"
+Shader "Custom/Storm"
 {
-    Properties {}
-
-    CGINCLUDE
-    #include "UnityCG.cginc"
-    #include "Packages/jp.keijiro.noiseshader/Shader/ClassicNoise2D.hlsl"
-
-    void Vertex(float4 position : POSITION,
-                float2 uv : TEXCOORD,
-                out float4 outPosition : SV_Position,
-                out float2 outUV : TEXCOORD)
+    Properties
     {
-        outPosition = UnityObjectToClipPos(position);
-        outUV = uv;
+        _NoiseScale ("Scale", Float) = 0.75
+        _Speed ("Speed", Float) = 10
+        _Fill ("Fill", Float) = 10
+        _Size ("Size", Float) = 10
+        _TOffset ("TOffset", Float) = 2.5
+        _Color ("Color", Color) = (1,1,1,1)
+        
     }
-
-    float4 Fragment(float4 position : SV_Position,
-                    float2 uv : TEXCOORD) : SV_Target
-    {
-        uv = uv * 4 + float2(-1, 1) * _Time.y;
-        float output = 0.5;
-        float size = 1;
-        float width = 0.5;
-
-        for (int i = 0; i < 3; i++)
-        {
-            float2 coord = uv * size;
-            output += ClassicNoise(coord) * width;
-        }
-
-        return float4(output, output, output, 1);
-    }
-    ENDCG
-
+    
     SubShader
     {
+        Tags
+        {
+            "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"
+        }
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
+        //Cull front 
+        LOD 100
         Pass
         {
             CGPROGRAM
             #pragma vertex Vertex
             #pragma fragment Fragment
+
+            #include "UnityCG.cginc"
+            #include "Packages/jp.keijiro.noiseshader/Shader/SimplexNoise2D.hlsl"
+
+            void Vertex(float4 position : POSITION,
+                        float2 uv : TEXCOORD,
+                        out float4 outPosition : SV_Position,
+                        out float2 outUV : TEXCOORD)
+            {
+                outPosition = UnityObjectToClipPos(position);
+                outUV = uv;
+            }
+
+            float4 _Color;
+            float _NoiseScale;
+            float _Speed;
+            float _Size;
+            float _Fill;
+            float _TOffset;
+
+            float4 Fragment(float4 position : SV_Position,
+                            float2 uv : TEXCOORD) : SV_Target
+            {           
+                float2 coord = uv * _Size;     
+                coord.x -= _Time.y*_Speed;                        
+                const float output = _TOffset + SimplexNoise(coord);                
+
+                return float4(_Color.x, _Color.y, _Color.z, output * _Color.w);
+            }
             ENDCG
         }
     }
+    FallBack "Diffuse"
 }
