@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f0f10e0457242249b8255c0a2df3bc5, type: 3}
+  m_Script: {fileID: 11500000, guid: be4e65c9af94b0842b7641895fb4edd8, type: 3}
   m_Name: TextStorage
   m_EditorClassIdentifier: 
   textFolder: Text/

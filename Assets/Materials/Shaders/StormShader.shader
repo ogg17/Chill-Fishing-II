@@ -28,7 +28,7 @@ Shader "Custom/Storm"
             #pragma fragment Fragment
 
             #include "UnityCG.cginc"
-            #include "Packages/jp.keijiro.noiseshader/Shader/SimplexNoise2D.hlsl"
+            #include "Assets/Materials/Shaders/PsrdNoise2D.hlsl"
 
             void Vertex(float4 position : POSITION,
                         float2 uv : TEXCOORD,
@@ -50,8 +50,9 @@ Shader "Custom/Storm"
                             float2 uv : TEXCOORD) : SV_Target
             {           
                 float2 coord = uv * _Size;     
-                coord.x -= _Time.y*_Speed;                        
-                const float output = _TOffset + SimplexNoise(coord);                
+                coord.x -= _Time.y*_Speed;
+                float2 gradient;
+                const float output = _TOffset + PsrdNoise(coord, float2(5, 5), 0.5, gradient);                
 
                 return float4(_Color.x, _Color.y, _Color.z, output * _Color.w);
             }

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26b5da00abf995949a3c044404ead3ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e4a39facc3f5924498cd52218cb50d9, type: 3}
   m_Name: CoreStorage
   m_EditorClassIdentifier: 
-  textStorage: {fileID: 11400000, guid: a148ee372088d9b41ab0961036f995e4, type: 2}
-  settingsStorage: {fileID: 11400000, guid: dcdd7fa8677c7f143bad5d306c85d8af, type: 2}
-  eventsStorage: {fileID: 11400000, guid: e2bcf78cfce592c45ac618e86db3f14c, type: 2}
+  textStorage: {fileID: 11400000, guid: c3bbce7afc27ea04ebc9b24523ca2da7, type: 2}
+  settingsStorage: {fileID: 11400000, guid: 6df4c87f74699d346821933305fe1904, type: 2}
+  eventsStorage: {fileID: 11400000, guid: 624fd2e380367f1469dee4a27fa846ff, type: 2}
