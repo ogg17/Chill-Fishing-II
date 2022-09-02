@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Storm
-  m_Shader: {fileID: 4800000, guid: 5ea3c5bd97ce9184a94640c43e813b7f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 994838d2313f90449b7df9af3914d838, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
