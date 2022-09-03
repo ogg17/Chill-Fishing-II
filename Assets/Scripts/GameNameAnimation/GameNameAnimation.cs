@@ -20,10 +20,10 @@ namespace GameNameAnimation
         [SerializeField] private Vector2 llHiddenPosition;
         private Vector3 _llPos;
         
-        [Space]
+        /*[Space]
         [SerializeField] private GameObject houseObject;
         [SerializeField] private Vector2 houseHiddenPosition;
-        private Vector3 _housePos;
+        private Vector3 _housePos;*/
         
         [Space]
         [SerializeField] private float animDuration;
@@ -32,15 +32,15 @@ namespace GameNameAnimation
 
         private void Awake()
         {
-            _fishingPos = fishingObject.transform.position;
-            _chiPos = chiObject.transform.position;
-            _llPos = llObject.transform.position;
-            _housePos = houseObject.transform.position;
+            _fishingPos = fishingObject.transform.localPosition;
+            _chiPos = chiObject.transform.localPosition;
+            _llPos = llObject.transform.localPosition;
+            //_housePos = houseObject.transform.position;
             
-            fishingObject.transform.position = fishingHiddenPosition;
-            chiObject.transform.position = chiHiddenPosition;
-            llObject.transform.position = llHiddenPosition;
-            houseObject.transform.position = houseHiddenPosition;
+            fishingObject.transform.localPosition = fishingHiddenPosition;
+            chiObject.transform.localPosition = chiHiddenPosition;
+            llObject.transform.localPosition = llHiddenPosition;
+            //houseObject.transform.position = houseHiddenPosition;
         }
 
         private void Start()
@@ -49,10 +49,10 @@ namespace GameNameAnimation
             sequence
                 .SetEase(Ease.OutCubic)
                 .SetDelay(animDelay)
-                .Append(fishingObject.transform.DOMove(_fishingPos, animDuration))
-                .Append(chiObject.transform.DOMove(_chiPos, animDuration))
-                .Append(llObject.transform.DOMove(_llPos, animDuration))
-                .Append(houseObject.transform.DOMove(_housePos, animDuration));
+                .Append(fishingObject.transform.DOLocalMove(_fishingPos, animDuration))
+                .Append(chiObject.transform.DOLocalMove(_chiPos, animDuration))
+                .Append(llObject.transform.DOLocalMove(_llPos, animDuration));
+                //.Append(houseObject.transform.DOMove(_housePos, animDuration));
             //sequence.Kill();
         }
 
