@@ -1,4 +1,6 @@
 using System.Collections;
+using Animations;
+using DG.Tweening;
 using Leopotam.EcsLite;
 using TranslatableString;
 using UnityEngine;
@@ -30,6 +32,7 @@ namespace Core
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
 #endif
                 .Add(new ChangeLanguageInitSystem())
+                .Add(new AnimationInitSystem())
                 .Init();
 
             _fixedSystems = new EcsSystems(_world, _systems.GetShared<WorldData>());
@@ -42,7 +45,9 @@ namespace Core
             _eventSystems = new EventSystems(_world, sceneData, coreStorage.eventsStorage);
             StartCoroutine(EndSplashScreen());
 
-            coreStorage.eventsStorage.finishedSplashScreen.AddListener(sceneData.gameNameAnimation.OnFinishedSplashScreen);
+            coreStorage.eventsStorage.finishedSplashScreen.AddListener(sceneData.gameNameAnimationScript.OnFinishedSplashScreen);
+
+            //DOTween.PauseAll();
         }
 
         private void Update()

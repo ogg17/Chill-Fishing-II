@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using Animations;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core
 {
     public class SceneData: MonoBehaviour
     {
         public GameObject sceneContext;
-        public GameNameAnimation.GameNameAnimation gameNameAnimation;
+        [FormerlySerializedAs("gameNameAnimation")] public GameNameAnimationScript gameNameAnimationScript;
     }
 }
