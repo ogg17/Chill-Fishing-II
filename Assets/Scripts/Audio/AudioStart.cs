@@ -5,11 +5,14 @@ namespace Audio
 {
     public class AudioStart : MonoBehaviour
     {
+        [SerializeField][Range(0, 1)] private float volumeLevel = 0.5f;
+        [SerializeField] private float duration = 3;
         private void Awake()
         {
+            DontDestroyOnLoad(this);
             var audioSource = GetComponent<AudioSource>();
             audioSource.volume = 0;
-            audioSource.DOFade(0.5f, 4).SetEase(Ease.InCubic);
+            audioSource.DOFade(volumeLevel, duration).SetEase(Ease.InCubic);
         }
     }
 }
