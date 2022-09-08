@@ -42,7 +42,7 @@ namespace Animations
             //houseObject.transform.position = houseHiddenPosition;
         }
 
-        public Tween StartAnim()
+        public void StartAnim()
         {
             var sequence = DOTween.Sequence()
                 .SetEase(Ease.OutCubic)
@@ -52,12 +52,6 @@ namespace Animations
                 .Insert(3*animDelay,llObject.transform.DOLocalMove(_llPos, animDuration));
 
             //.Append(houseObject.transform.DOMove(_housePos, animDuration));
-            return sequence;
-        }
-
-        public void OnFinishedSplashScreen()
-        {
-            
         }
     }
 }

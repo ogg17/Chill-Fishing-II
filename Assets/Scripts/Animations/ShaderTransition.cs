@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShaderTransition : MonoBehaviour
+namespace Animations{
+public class ShaderTransition : MonoBehaviour, IAnimatable
 {
     [SerializeField] private Color transitionColor;
     [SerializeField] private float offsetValue = 0.8f;
@@ -13,10 +14,8 @@ public class ShaderTransition : MonoBehaviour
 
     private MeshRenderer meshRenderer;
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartAnim()
     {
-        DontDestroyOnLoad(this);
         meshRenderer = GetComponent<MeshRenderer>();
         StartCoroutine(TransitionStart());
     }
@@ -36,4 +35,5 @@ public class ShaderTransition : MonoBehaviour
         meshRenderer.material.DOColor(startColor, duration);
     }
 
+}
 }

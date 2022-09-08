@@ -26,26 +26,24 @@ namespace Core
             _world = new EcsWorld();
             
             _systems = new EcsSystems(_world, new WorldData {
-                CoreStorage = coreStorage, SceneData = sceneData } );
+                CoreStorage = coreStorage, SceneData = sceneData });
             _systems
 #if UNITY_EDITOR
                 .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
 #endif
-                .Add(new ChangeLanguageInitSystem())
-                .Add(new AnimationInitSystem())
+                .Add(new ChangeLanguageInitSystem())                
                 .Init();
 
-            _fixedSystems = new EcsSystems(_world, _systems.GetShared<WorldData>());
-            
+            _fixedSystems = new EcsSystems(_world, new WorldData {
+                CoreStorage = coreStorage, SceneData = sceneData });
+
             Initialization();
         }
 
         private void Initialization()
         {
-            _eventSystems = new EventSystems(_world, sceneData, coreStorage.eventsStorage);
+            _eventSystems = new EventSystems(_world, sceneData, coreStorage);
             StartCoroutine(EndSplashScreen());
-
-            coreStorage.eventsStorage.finishedSplashScreen.AddListener(sceneData.gameNameAnimationScript.OnFinishedSplashScreen);
 
             //DOTween.PauseAll();
         }

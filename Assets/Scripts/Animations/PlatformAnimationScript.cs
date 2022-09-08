@@ -37,7 +37,7 @@ namespace Animations
             }
         }
 
-        public Tween StartAnim()
+        public void StartAnim()
         {
             var sequence = DOTween.Sequence()
                 .SetEase(Ease.OutCubic)
@@ -50,9 +50,7 @@ namespace Animations
                 i += animDelay;
                 //sequence.AppendInterval(animDelay);
 
-            }
-
-            return sequence;
+            }            
         }
     }
 }

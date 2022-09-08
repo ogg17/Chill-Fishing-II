@@ -9,5 +9,6 @@ namespace Core
         public TextStorage textStorage;
         public SettingsStorage settingsStorage;
         public EventsStorage eventsStorage;
+        public SceneSettings sceneSettings;
     }
 }

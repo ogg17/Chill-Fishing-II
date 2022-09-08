@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Animations;
 using Leopotam.EcsLite;
 using TranslatableString;
 using UnityEngine;
@@ -9,22 +10,37 @@ namespace Core
     public class EventSystems
     {
         private EcsSystems _changeLanguageSystems;
-        private readonly EventsStorage _eventsStorage;
-        public EventSystems(EcsWorld world, SceneData sceneData, EventsStorage eventsStorage)
+        private EcsSystems _finishedSplashScreenSystems;
+        private readonly CoreStorage _coreStorage;
+        public EventSystems(EcsWorld world, SceneData sceneData, CoreStorage coreStorage)
         {
-            _eventsStorage = eventsStorage;
+            _coreStorage = coreStorage;
             
-            _changeLanguageSystems = new EcsSystems(world, sceneData);
+            _changeLanguageSystems = new EcsSystems(world, new WorldData
+            { CoreStorage = coreStorage, SceneData = sceneData });
             _changeLanguageSystems.Add(new ChangeLanguageSystem());
-           // _changeLanguageSystems.Init();
-           _eventsStorage.changeLanguage.AddListener(_changeLanguageSystems.Run);
+            _changeLanguageSystems.Init();
+            _coreStorage.eventsStorage.changeLanguage.AddListener(_changeLanguageSystems.Run);
+
+            _finishedSplashScreenSystems = new EcsSystems(world, new WorldData
+            { CoreStorage = coreStorage, SceneData = sceneData });
+            _finishedSplashScreenSystems.Add(new AnimationInitSystem());
+            _finishedSplashScreenSystems.Init();
+            _coreStorage.eventsStorage.finishedSplashScreen.AddListener(_finishedSplashScreenSystems.Run);
         }
 
         public void Destroy()
         {
-            if (_changeLanguageSystems != null) {
+            if (_changeLanguageSystems != null) 
+            {
                 _changeLanguageSystems.Destroy();
                 _changeLanguageSystems = null;
+            }
+
+            if (_finishedSplashScreenSystems != null)
+            {
+                _finishedSplashScreenSystems.Destroy();
+                _finishedSplashScreenSystems = null;
             }
         }
     }

@@ -40,8 +40,8 @@ public class ColorPulse : MonoBehaviour
         sequenceRotation.SetEase(Ease.OutCubic)
             //.SetDelay(pulseDuration)
             //.AppendInterval(pulseDuration)
-            .Insert(0,transform.DORotate(startRot, pulseDuration))
-            .Insert(pulseDuration,transform.DORotate(endRot, pulseDuration));
+            .Insert(pulseDuration, transform.DORotate(startRot, pulseDuration))
+            .Insert(2*pulseDuration, transform.DORotate(endRot, pulseDuration));            
         return sequenceRotation;
     }
 }

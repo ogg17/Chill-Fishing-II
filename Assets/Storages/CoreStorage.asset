@@ -15,3 +15,4 @@ MonoBehaviour:
   textStorage: {fileID: 11400000, guid: a148ee372088d9b41ab0961036f995e4, type: 2}
   settingsStorage: {fileID: 11400000, guid: dcdd7fa8677c7f143bad5d306c85d8af, type: 2}
   eventsStorage: {fileID: 11400000, guid: e2bcf78cfce592c45ac618e86db3f14c, type: 2}
+  sceneSettings: {fileID: 11400000, guid: fd63d6852fc3c6a49bfb97fecc26bad3, type: 2}

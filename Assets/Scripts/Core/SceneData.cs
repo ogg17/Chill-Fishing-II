@@ -6,7 +6,7 @@ namespace Core
 {
     public class SceneData: MonoBehaviour
     {
-        public GameObject sceneContext;
+        public SceneContext sceneContext;
         [FormerlySerializedAs("gameNameAnimation")] public GameNameAnimationScript gameNameAnimationScript;
     }
 }

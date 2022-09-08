@@ -4,6 +4,6 @@ namespace Animations
 {
     public interface IAnimatable
     {
-        public Tween StartAnim();
+        public void StartAnim();
     }
 }
